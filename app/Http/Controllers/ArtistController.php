@@ -30,7 +30,8 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        //
+        // Affichage du formulaire de création d'un artiste -> se contente d'afficher le formulaire
+        return view('artist.create');
     }
 
     /**
@@ -41,7 +42,22 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation des données du formulaire
+        $validated = $request->validate([
+            'firstname' => 'required|max:30',
+            'lastname' => 'required|max:30',
+        ]);
+
+        // Le formulaire est valide, nous créons un nouvel artiste
+        $artist = new Artist();
+
+        // Mise à jour des données et sauvegarde dans la base de données
+        $artist->firstname = $validated['firstname'];
+        $artist->lastname = $validated['lastname'];
+
+        $artist->save();
+
+        return redirect()->route('artist.index');
     }
 
     /**

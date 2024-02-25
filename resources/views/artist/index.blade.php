@@ -22,4 +22,5 @@
         @endforeach
     </tbody>
 </table>
+<a href="{{ route('artist.create') }}">Ajouter un artiste</a>
 @endsection
