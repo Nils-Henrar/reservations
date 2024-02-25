@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
-@section('title', 'Modifier un artiste')
+@section('title', 'Ajouter un artiste')
 
 @section('content')
 <h2>Ajouter un artiste</h2>

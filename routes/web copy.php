@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArtistController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,21 +45,3 @@ Route::put('/artist/{id}', [ArtistController::class, 'update'])
 // route pour la suppression d'un artiste
 Route::delete('/artist/{id}', [ArtistController::class, 'destroy'])
     ->where('id', '[0-9]+')->name('artist.delete');
-
-
-
-
-
-
-// ROUTES FOR AUTHENTICATION
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__ . '/auth.php';
