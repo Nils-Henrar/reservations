@@ -129,6 +129,16 @@ class ArtistController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Suppression de l'artiste
+        $artist = Artist::find($id);
+
+        if ($artist) {
+            $artist->delete();
+        }
+
+        // ou utiliser la méthode destroy
+        // Artist::destroy($id);
+
+        return redirect()->route('artist.index');
     }
 }

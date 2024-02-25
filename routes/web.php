@@ -40,3 +40,8 @@ Route::get('/artist/edit/{id}', [ArtistController::class, 'edit'])
 // route pour la mise à jour d'un artiste
 Route::put('/artist/{id}', [ArtistController::class, 'update'])
     ->where('id', '[0-9]+')->name('artist.update');
+
+// DELETE
+// route pour la suppression d'un artiste
+Route::delete('/artist/{id}', [ArtistController::class, 'destroy'])
+    ->where('id', '[0-9]+')->name('artist.delete');
