@@ -17,5 +17,5 @@ class Artist extends Model
 
     protected $table = 'artists';
 
-    protected $timestamp = false;
+    public $timestamps = false;
 }
