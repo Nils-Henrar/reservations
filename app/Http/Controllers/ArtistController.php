@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Artist;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 
 class ArtistController extends Controller
 {
@@ -31,10 +33,9 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        if (Auth::user() == null || Auth::user()->role != 'admin') {
-            return redirect()->route('login');
+        if (!Gate::allows('create-artist')) {
+            abort(403, 'Unauthorized action.');
         }
-
         // Affichage du formulaire de création d'un artiste -> se contente d'afficher le formulaire
         return view('artist.create');
     }
@@ -90,6 +91,10 @@ class ArtistController extends Controller
     public function edit(string $id)
     {
         //
+        if (!Gate::allows('create-artist')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $artist = Artist::find($id);
 
         return view('artist.edit', [
@@ -134,6 +139,10 @@ class ArtistController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!Gate::allows('create-artist')) {
+            abort(403);
+        }
+
         // Suppression de l'artiste
         $artist = Artist::find($id);
 
